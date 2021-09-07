@@ -1,0 +1,42 @@
+name: cs
+description: A new Flutter project.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  page_transition: ^2.0.2
+  animated_text_kit: ^4.2.1
+  circular_countdown_timer: ^0.2.0
+  animated_splash_screen: ^1.1.0-nullsafety.0
+  flutter_launcher_icons: ^0.8.1
+  flutter_screenutil: ^5.0.0+2
+  #share: ^2.0.4
+  #fluttertoast: ^8.0.8
+  #audioplayers: ^0.17.0
+  #advance_pdf_viewer: ^2.0.0
+
+flutter_icons:
+  ios: true
+  android: true
+  image_path: "icons/exam.png"
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/sounds/
+    - assets/files/
+    - icons/
