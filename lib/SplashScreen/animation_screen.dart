@@ -72,7 +72,7 @@ class _AnimationScreenState extends State<AnimationScreen>
             child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage('assets/images/background-1.png'),
+                    image: AssetImage('assets/images/splash-background.png'),
                     fit: BoxFit.cover),
               ),
               child: Column(

@@ -286,11 +286,10 @@ class _ResultsState extends State<Results> {
               quizBox(),
             ],
           ),
-          SizedBox(height: 0.15.sh),
+          SizedBox(height: 0.125.sh),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              SizedBox(width: 0.05.sw),
               Column(
                 children: [
                   TextButton(
@@ -317,7 +316,6 @@ class _ResultsState extends State<Results> {
                   )
                 ],
               ),
-              SizedBox(width: 0.05.sw),
               Column(
                 children: [
                   TextButton(
@@ -342,7 +340,6 @@ class _ResultsState extends State<Results> {
                   ),
                 ],
               ),
-              SizedBox(width: 0.05.sw),
               Column(
                 children: [
                   TextButton(
@@ -370,7 +367,6 @@ class _ResultsState extends State<Results> {
                   ),
                 ],
               ),
-              SizedBox(width: 0.05.sw),
             ],
           )
         ],
