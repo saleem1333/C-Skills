@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'Home.dart';
-import 'PDFPage.dart';
+// import 'PDFPage.dart';
 import 'QuizPage.dart';
 
 // ignore: must_be_immutable
@@ -139,7 +139,7 @@ class _ReadyState extends State<Ready> {
                     ),
                   ),
                 ),
-                flex: 3,
+                flex: 4,
               ),
               Padding(
                 padding: EdgeInsets.all(0.012.sh),

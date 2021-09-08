@@ -1,4 +1,5 @@
 import 'dart:ui';
+// import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
 import 'package:cs/Pages/Ready.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,26 +17,41 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    const drawerheader = UserAccountsDrawerHeader(
+      accountName: Text('Osama rida'),
+      accountEmail: Text('Omar  kaialy'),
+      currentAccountPicture: CircleAvatar(
+        child: FlutterLogo(
+          size: 4,
+        ),
+      ),
+      otherAccountsPictures: [
+        CircleAvatar(
+          child: FlutterLogo(
+            size: 4,
+          ),
+        ),
+      ],
+      decoration: BoxDecoration(color: Colors.purple),
+      currentAccountPictureSize: Size.square(80),
+    );
+
+    final drawerItems = ListView(
+      children: [
+        drawerheader,
+        ListTile(title: Text('omar'), onTap: () {}),
+        ListTile(
+          title: Text('osama'),
+          onTap: () {},
+        )
+      ],
+    );
     return SafeArea(
       child: Scaffold(
         extendBodyBehindAppBar: true,
         drawer: Drawer(
           elevation: 2,
-          child: Column(
-            children: [
-              SizedBox(height: 0.25.sh),
-              Row(
-                children: [
-                  Spacer(),
-                  Text(
-                    'developed by\nomar & osama',
-                    textAlign: TextAlign.center,
-                  ),
-                  Spacer(),
-                ],
-              )
-            ],
-          ),
+          child: drawerItems,
         ),
         appBar: AppBar(
           elevation: 0,
@@ -55,7 +71,22 @@ class _HomeState extends State<Home> {
               child: IconButton(
                 icon: Icon(Icons.info_outlined),
                 iconSize: 60.sp,
-                onPressed: () {},
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                            title: Text('about us'),
+                            content: Text(
+                                'لقد تم برمجة هذا التطبيق من قبل عمر كيالي و اسامة رضا عام 2021'),
+                            actions: [
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text('Cancel'))
+                            ],
+                          ));
+                },
               ),
             ),
           ],
@@ -162,56 +193,61 @@ Card myList(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(20),
     ),
-    child: Padding(
-      padding: EdgeInsets.all(0.012.sh),
-      child: ListTile(
-        onTap: () {
-          late String myImage, myDescription;
-          if (page == 'summary') {
-          } else if (page == 'circles') {
-            myImage = 'assets/images/exam-4.png';
-            myDescription = 'تم في هذا القسم أتمتة دورة 2020 ' +
-                'ووضعها على شكل Quiz ليتمكن الطالب من اختبار نفسه ومعرفة مستواه  في تلك الدورة.\n' +
-                '\n#ملاحظة: في كل سؤال لديك مهلة 30 ثانية للإجابة وإلا سيتم الانتقال للسؤال التالي' +
-                ' واعتبار الإجابة خاطئة.';
-          } else if (page == 'full exam') {
-            myImage = 'assets/images/stopwatch.png';
-            myDescription = 'هنا اختبار شامل تم وضعه من ضمن الملخص' +
-                ' يقيس مدى فهم الطالب للملخص واستعداده لامتحان مادة مهارات التواصل.\n' +
-                '\n#ملاحظة: في كل سؤال لديك مهلة 30 ثانية للإجابة وإلا سيتم الانتقال للسؤال التالي' +
-                ' واعتبار الإجابة خاطئة.';
-          }
-          tap(
-            context: context,
-            image: myImage,
-            description: myDescription,
-            page: page,
-          );
-        },
-        leading: icon,
-        title: Text(
-          '$title',
-          textDirection: TextDirection.rtl,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 35.sp,
-          ),
-        ),
-        subtitle: Text(
-          '$hint',
-          textDirection: TextDirection.rtl,
-          style: TextStyle(
-            fontSize: 30.sp,
-          ),
-        ),
-        trailing: CircleAvatar(
-          child: Image.asset('$image'),
-          backgroundColor: Colors.transparent,
-          radius: 40.sp,
-        ),
-        tileColor: Colors.white,
-        horizontalTitleGap: 0.045.sw,
+    child: ListTile(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
       ),
+      onTap: () {
+        late String myImage, myDescription;
+        if (page == 'summary') {
+          Navigator.push(
+              context!,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      PDFPage.withoutLocatio(key: Key('key3'))));
+        } else if (page == 'circles') {
+          myImage = 'assets/images/exam-4.png';
+          myDescription = 'تم في هذا القسم أتمتة دورة 2020 ' +
+              'ووضعها على شكل Quiz ليتمكن الطالب من اختبار نفسه ومعرفة مستواه  في تلك الدورة.\n' +
+              '\n#ملاحظة: في كل سؤال لديك مهلة 30 ثانية للإجابة وإلا سيتم الانتقال للسؤال التالي' +
+              ' واعتبار الإجابة خاطئة.';
+        } else if (page == 'full exam') {
+          myImage = 'assets/images/stopwatch.png';
+          myDescription = 'هنا اختبار شامل تم وضعه من ضمن الملخص' +
+              ' يقيس مدى فهم الطالب للملخص واستعداده لامتحان مادة مهارات التواصل.\n' +
+              '\n#ملاحظة: في كل سؤال لديك مهلة 30 ثانية للإجابة وإلا سيتم الانتقال للسؤال التالي' +
+              ' واعتبار الإجابة خاطئة.';
+        }
+        tap(
+          context: context,
+          image: myImage,
+          description: myDescription,
+          page: page,
+        );
+      },
+      leading: icon,
+      title: Text(
+        '$title',
+        textDirection: TextDirection.rtl,
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 35.sp,
+        ),
+      ),
+      subtitle: Text(
+        '$hint',
+        textDirection: TextDirection.rtl,
+        style: TextStyle(
+          fontSize: 30.sp,
+        ),
+      ),
+      trailing: CircleAvatar(
+        child: Image.asset('$image'),
+        backgroundColor: Colors.transparent,
+        radius: 40.sp,
+      ),
+      tileColor: Colors.white,
+      horizontalTitleGap: 0.045.sw,
     ),
   );
 }

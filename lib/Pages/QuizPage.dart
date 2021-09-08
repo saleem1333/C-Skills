@@ -1,12 +1,12 @@
 // ignore: import_of_legacy_library_into_null_safe
-// import 'package:audioplayers/audio_cache.dart';
+import 'package:audioplayers/audio_cache.dart';
 import 'dart:ui';
 import 'package:flutter/rendering.dart';
 import 'Results.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:fluttertoast/fluttertoast.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/services.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 
@@ -55,7 +55,7 @@ class _QuizPageState extends State<QuizPage> {
   int questionCounter = 1;
   int streak = 0;
   int wrongAnswers = 0;
-  // final assetsAudioPlayer = AudioCache();
+  final assetsAudioPlayer = AudioCache();
   CountDownController _controller = CountDownController();
   //end variables
 
@@ -456,7 +456,7 @@ class _QuizPageState extends State<QuizPage> {
 
   // Toast message
   void showMessage(String message, Color kColor) {
-    /*FToast().init(context).showToast(
+    FToast().init(context).showToast(
           gravity: ToastGravity.CENTER,
           toastDuration: Duration(milliseconds: 1500),
           child: Container(
@@ -471,7 +471,7 @@ class _QuizPageState extends State<QuizPage> {
                   style: TextStyle(fontSize: 12, color: Colors.white)),
             ),
           ),
-        );*/
+        );
   }
 
   //resetting choice buttons colors
@@ -511,12 +511,12 @@ class _QuizPageState extends State<QuizPage> {
 
   // play sounds
   void playSound(int i) {
-    /*if (i == 1) {
+    if (i == 1) {
       assetsAudioPlayer.play('sounds/Correct.mp3');
     } else if (i == 2) {
       assetsAudioPlayer.play('sounds/clapping.wav');
     } else
-      assetsAudioPlayer.play('sounds/Wrong.mp3');*/
+      assetsAudioPlayer.play('sounds/Wrong.mp3');
   }
 
   // show all buttons' colors

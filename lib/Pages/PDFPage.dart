@@ -1,4 +1,3 @@
-/*
 import 'package:flutter/material.dart';
 import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
 
@@ -29,6 +28,7 @@ class _PDFPageState extends State<PDFPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Center(
           child: _isLoading
@@ -44,4 +44,3 @@ class _PDFPageState extends State<PDFPage> {
     );
   }
 }
-*/
