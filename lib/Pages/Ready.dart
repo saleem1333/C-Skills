@@ -4,14 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'Home.dart';
-// import 'PDFPage.dart';
+import 'PDFPage.dart';
 import 'QuizPage.dart';
 
 // ignore: must_be_immutable
 class Ready extends StatefulWidget {
-  String? page;
-  String? image;
-  String? description;
   Ready.without(Key key);
 
   Ready.withoutLocatio({
@@ -21,16 +18,21 @@ class Ready extends StatefulWidget {
     required this.description,
   }) : super(key: key);
 
+  String? description;
+  String? image;
+  String? page;
+
   @override
   _ReadyState createState() => _ReadyState(page, image, description);
 }
 
 class _ReadyState extends State<Ready> {
+  _ReadyState(this.page, this.image, this.description);
+
+  String? description;
+  String? image;
   Color ourColor = Color.fromARGB(255, 154, 88, 216);
   String? page;
-  String? image;
-  String? description;
-  _ReadyState(this.page, this.image, this.description);
 
   @override
   Widget build(BuildContext context) {
@@ -184,6 +186,12 @@ class _ReadyState extends State<Ready> {
                               ),
                             ),
                           );
+                        } else if (page == 'summary') {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PDFPage.withoutLocatio(
+                                      key: Key('key3'))));
                         } else if (page == 'full exam') {
                           Navigator.push(
                             context,

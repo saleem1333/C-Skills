@@ -200,11 +200,8 @@ Card myList(
       onTap: () {
         late String myImage, myDescription;
         if (page == 'summary') {
-          Navigator.push(
-              context!,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      PDFPage.withoutLocatio(key: Key('key3'))));
+          myImage = 'assets/images/summary.png';
+          myDescription = 'هنا يوجد تلخيص للمقرر ';
         } else if (page == 'circles') {
           myImage = 'assets/images/exam-4.png';
           myDescription = 'تم في هذا القسم أتمتة دورة 2020 ' +

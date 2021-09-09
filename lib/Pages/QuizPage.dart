@@ -37,7 +37,7 @@ class _QuizPageState extends State<QuizPage> {
   _QuizPageState(this.map, this.answersList, this.correctAnswers);
 
   String answer = '';
-  String boolean = '';
+  bool timerresume = true;
   //to set a color for each button
   var btnColor = {
     'a': Colors.white12,
@@ -51,7 +51,7 @@ class _QuizPageState extends State<QuizPage> {
   int marks = 0;
   Color ourColor = Color.fromARGB(255, 154, 88, 216);
   Color timerColor = Color.fromARGB(255, 154, 88, 216);
-  //TODO: timerColor = (_controller.getTime() <= 5) ? ourColor : Colors.red
+  // TODO: timerColor = (_controller.getTime() <= 5) ? ourColor : Colors.red
   int questionCounter = 1;
   int streak = 0;
   int wrongAnswers = 0;
@@ -499,6 +499,7 @@ class _QuizPageState extends State<QuizPage> {
         HapticFeedback.vibrate();
       }
       showBtnColors();
+      timerresume = false;
       _controller.pause();
       buttonDisabled++;
       answer = '';
@@ -544,13 +545,14 @@ class _QuizPageState extends State<QuizPage> {
           ),
         );
       }
-      _controller.restart();
       btnColor['a'] = Colors.black45;
       btnColor['b'] = Colors.black45;
       btnColor['c'] = Colors.black45;
       btnColor['d'] = Colors.black45;
-      if (questionCounter >= buttonDisabled) {
+      if (questionCounter == buttonDisabled && timerresume) {
         _controller.resume();
+      } else if (questionCounter == buttonDisabled && !timerresume) {
+        _controller.restart();
       }
     });
   }
@@ -558,6 +560,7 @@ class _QuizPageState extends State<QuizPage> {
   // to move to previous quiz
   void previousQuiz() {
     setState(() {
+      timerresume = true;
       _controller.pause();
       questionCounter--;
       btnColor['a'] = Colors.black45;
