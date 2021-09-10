@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 // import 'package:share/share.dart';
-import 'Home.dart';
+import 'hom.dart';
 
 // ignore: must_be_immutable
 class Results extends StatefulWidget {

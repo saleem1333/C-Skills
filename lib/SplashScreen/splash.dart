@@ -1,5 +1,6 @@
+import 'package:cs/Pages/hom.dart';
 import 'package:flutter/material.dart';
-import '../Pages/Home.dart';
+// import '../Pages/Home.dart';
 import 'animation_screen.dart';
 
 class Splash extends StatefulWidget {
