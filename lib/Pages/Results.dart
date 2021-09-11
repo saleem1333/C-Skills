@@ -1,7 +1,7 @@
 import 'package:cs/Pages/QuizPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:share/share.dart';
+import 'package:share/share.dart';
 import 'Home.dart';
 
 // ignore: must_be_immutable
@@ -96,7 +96,7 @@ class _ResultsState extends State<Results> {
                                         ],
                                       ),
                                       Text(
-                                        '0$marks',
+                                        '$marks',
                                         style: TextStyle(
                                           fontSize: 72.sp,
                                           color: ourColor,
@@ -295,7 +295,7 @@ class _ResultsState extends State<Results> {
                 children: [
                   TextButton(
                     onPressed: () {
-                      // Share.share('لقد حققت $marks اجابة صحيحة في الاختبار');
+                      Share.share('لقد حققت $marks اجابة صحيحة في الاختبار');
                     },
                     child: CircleAvatar(
                       radius: 80.sp,

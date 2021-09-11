@@ -509,8 +509,10 @@ class _QuizPageState extends State<QuizPage> {
             height: 0.06.sh,
             width: 0.5.sw,
             child: Center(
-              child: Text(message,
-                  style: TextStyle(fontSize: 12, color: Colors.white)),
+              child: Text(
+                message,
+                style: TextStyle(fontSize: 12, color: Colors.white),
+              ),
             ),
           ),
         );
@@ -623,37 +625,26 @@ class _QuizPageState extends State<QuizPage> {
         elevation: 0,
         actions: [
           Padding(
-              padding:
-                  EdgeInsets.symmetric(horizontal: 0.02.sw, vertical: 0.sw),
-              child: Showcase(
-                showcaseBackgroundColor: Color.fromARGB(255, 154, 88, 216),
-                descTextStyle: TextStyle(color: Colors.white),
-                description: 'يمكنك  الضغط هنا لرؤية شرح الازرار',
-                key: _key,
-                child: IconButton(
-                  icon: Icon(Icons.info_outlined),
-                  iconSize: 60.sp,
-                  onPressed: () {
-                    _controller.pause();
-                    WidgetsBinding.instance!.addPostFrameCallback((_) =>
-                        ShowCaseWidget.of(context)!
-                            .startShowCase([_key0, _key1, _key2, _key3]));
-                    // showDialog(
-                    //     context: context,
-                    //     builder: (BuildContext context) => AlertDialog(
-                    //           title: Text('ملاحظات:'),
-                    //           content: Text(
-                    //               '\n النص متحرك اسحب فوق النص لرؤية كامل السؤال \n استخدم الاسهم للانتقال بين الاسئلة اضغط على زر التحقق بعد اختيار الاجابة لفحص اجابتك '),
-                    //           actions: [
-                    //             TextButton(
-                    //                 onPressed: () {
-                    //                   },
-                    //                 child: Text('Cancel'))
-                    //           ],
-                    //         ));
-                  },
-                ),
-              ))
+            padding: EdgeInsets.symmetric(horizontal: 0.02.sw, vertical: 0.sw),
+            child: Showcase(
+              showcaseBackgroundColor: Color.fromARGB(255, 154, 88, 216),
+              descTextStyle: TextStyle(color: Colors.white),
+              description: 'يمكنك  الضغط هنا لرؤية شرح الازرار',
+              key: _key,
+              child: IconButton(
+                icon: Icon(Icons.info_outlined),
+                iconSize: 60.sp,
+                onPressed: () {
+                  _controller.pause();
+                  WidgetsBinding.instance!.addPostFrameCallback(
+                    (_) => ShowCaseWidget.of(context)!.startShowCase(
+                      [_key0, _key1, _key2, _key3],
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
         ],
       ),
       body: Stack(

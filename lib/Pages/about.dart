@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AboutPage extends StatelessWidget {
   AboutPage.without(Key key);
@@ -9,11 +9,11 @@ class AboutPage extends StatelessWidget {
     required Key key,
   }) : super(key: key);
 
-  static const telegramAccount = 'https://t.me/Os01Ri';
+  static const telegramAccount = 'https://t.me/Cskills_bot';
 
-  // void _launchURL() async => await canLaunch(telegramAccount)
-  //     ? await launch(telegramAccount)
-  //     : throw 'Could not launch $telegramAccount';
+  void _launchURL() async => await canLaunch(telegramAccount)
+      ? await launch(telegramAccount)
+      : throw 'Could not launch $telegramAccount';
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +64,7 @@ class AboutPage extends StatelessWidget {
                     child: Text(
                       'تم إنشاء هذا التطبيق نتيجة لكثرة شكاوي الطلاب حول ' +
                           ' عدم معرفة كيفية دراسة مادة مهارات التواصل، ' +
-                          'وعند طرح الفكرة تلقّت إعجاباً كبيراً فتم تنفيذها.\n' +
+                          'وعند طرح الفكرة نالت إعجاباً كبيراً فتم تنفيذها.\n' +
                           'يرجى التواصل مع المطورين في حال تم اكتشاف أخطاء ' +
                           'سواء كانت علمية أم تقنية،، وشكراً لكم',
                       textDirection: TextDirection.rtl,
