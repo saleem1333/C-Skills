@@ -23,6 +23,7 @@ dependencies:
   fluttertoast: ^8.0.8
   audioplayers: ^0.16.0
   advance_pdf_viewer: ^1.0.0
+  showcaseview: ^1.1.1
 
 flutter_icons:
   ios: true

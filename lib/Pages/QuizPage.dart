@@ -2,6 +2,7 @@
 import 'package:audioplayers/audio_cache.dart';
 import 'dart:ui';
 import 'package:flutter/rendering.dart';
+import 'package:showcaseview/showcaseview.dart';
 import 'Results.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -30,7 +31,20 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
-  //variables:
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      ShowCaseWidget.of(context)!
+          .startShowCase([_key0, _key1, _key2, _key3, _key]);
+    });
+  } //variables:
+
+  final _key = GlobalKey();
+  final _key1 = GlobalKey();
+  final _key0 = GlobalKey();
+  final _key2 = GlobalKey();
+  final _key3 = GlobalKey();
   var map;
   var answersList;
   var correctAnswers;
@@ -137,26 +151,32 @@ class _QuizPageState extends State<QuizPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  RotatedBox(
-                    quarterTurns: 2,
-                    child: TextButton(
-                      onPressed: () {
-                        if (questionCounter == 1) {
-                          showMessage('لا يوجد سؤال سابق', Colors.red);
-                        } else if (buttonClicked) {
-                        } else {
-                          setState(() {
-                            previousQuiz();
-                            resetButtonsColors();
-                            showBtnColors();
-                            _controller.pause();
-                          });
-                        }
-                      },
-                      child: Icon(
-                        Icons.arrow_forward_ios,
-                        color: ourColor,
-                        size: 60.sp,
+                  Showcase(
+                    showcaseBackgroundColor: Color.fromARGB(255, 154, 88, 216),
+                    descTextStyle: TextStyle(color: Colors.white),
+                    description: 'اضغط للانتقال للسؤال السابق ',
+                    key: _key2,
+                    child: RotatedBox(
+                      quarterTurns: 2,
+                      child: TextButton(
+                        onPressed: () {
+                          if (questionCounter == 1) {
+                            showMessage('لا يوجد سؤال سابق', Colors.red);
+                          } else if (buttonClicked) {
+                          } else {
+                            setState(() {
+                              previousQuiz();
+                              resetButtonsColors();
+                              showBtnColors();
+                              _controller.pause();
+                            });
+                          }
+                        },
+                        child: Icon(
+                          Icons.arrow_forward_ios,
+                          color: ourColor,
+                          size: 60.sp,
+                        ),
                       ),
                     ),
                   ),
@@ -165,64 +185,79 @@ class _QuizPageState extends State<QuizPage> {
                       horizontal: (0.075.sw),
                       vertical: (0.sh),
                     ),
-                    child: MaterialButton(
-                      minWidth: 0.30.sw,
-                      height: 0.055.sh,
-                      color: Color.fromRGBO(220, 175, 255, 80),
-                      elevation: 10,
-                      disabledElevation: 3,
-                      disabledColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        side: BorderSide(
-                          color: ourColor,
-                          width: 2,
+                    child: Showcase(
+                      showcaseBackgroundColor:
+                          Color.fromARGB(255, 154, 88, 216),
+                      descTextStyle: TextStyle(color: Colors.white),
+                      description: 'اضغط هنا للتحقق من اجابتك',
+                      key: _key3,
+                      disposeOnTap: true,
+                      onTargetClick: () => _controller.resume(),
+                      child: MaterialButton(
+                        minWidth: 0.30.sw,
+                        height: 0.055.sh,
+                        color: Color.fromRGBO(220, 175, 255, 80),
+                        elevation: 10,
+                        disabledElevation: 3,
+                        disabledColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          side: BorderSide(
+                            color: ourColor,
+                            width: 2,
+                          ),
                         ),
-                      ),
-                      child: Text(
-                        'تحقق',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: ourColor,
-                          fontSize: 0.045.sw,
-                          fontWeight: FontWeight.bold,
+                        child: Text(
+                          'تحقق',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: ourColor,
+                            fontSize: 0.045.sw,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
+                        onPressed: () {
+                          setState(() {
+                            if (buttonDisabled == questionCounter &&
+                                answer != '') {
+                              checkAnswer(answer);
+                              showBtnColors();
+                              buttonClicked = false;
+                            } else if (buttonDisabled > questionCounter) {
+                              showMessage('لقد  أجبت عن هذا السؤال مسبقا',
+                                  Colors.green);
+                            } else
+                              showMessage('اختر إجابة', Colors.grey);
+                          });
+                        },
                       ),
-                      onPressed: () {
-                        setState(() {
-                          if (buttonDisabled == questionCounter &&
-                              answer != '') {
-                            checkAnswer(answer);
-                            showBtnColors();
-                            buttonClicked = false;
-                          } else if (buttonDisabled > questionCounter) {
-                            showMessage(
-                                'لقد  أجبت عن هذا السؤال مسبقا', Colors.green);
-                          } else
-                            showMessage('اختر إجابة', Colors.grey);
-                        });
-                      },
                     ),
                   ),
-                  TextButton(
-                    onPressed: (questionCounter >= buttonDisabled)
-                        ? () {
-                            showMessage(
-                                'عليك الاجابة قبل الانتقال الى السؤال التالي',
-                                Colors.grey);
-                          }
-                        : () {
-                            setState(() {
-                              nextQuiz();
-                              resetButtonsColors();
-                              if (questionCounter != buttonDisabled)
-                                showBtnColors();
-                            });
-                          },
-                    child: Icon(
-                      Icons.arrow_forward_ios,
-                      color: ourColor,
-                      size: 60.sp,
+                  Showcase(
+                    showcaseBackgroundColor: Color.fromARGB(255, 154, 88, 216),
+                    descTextStyle: TextStyle(color: Colors.white),
+                    description: 'اضغط للانتقال للسؤال التالي',
+                    key: _key1,
+                    child: TextButton(
+                      onPressed: (questionCounter >= buttonDisabled)
+                          ? () {
+                              showMessage(
+                                  'عليك الاجابة قبل الانتقال الى السؤال التالي',
+                                  Colors.grey);
+                            }
+                          : () {
+                              setState(() {
+                                nextQuiz();
+                                resetButtonsColors();
+                                if (questionCounter != buttonDisabled)
+                                  showBtnColors();
+                              });
+                            },
+                      child: Icon(
+                        Icons.arrow_forward_ios,
+                        color: ourColor,
+                        size: 60.sp,
+                      ),
                     ),
                   ),
                 ],
@@ -392,12 +427,19 @@ class _QuizPageState extends State<QuizPage> {
                       horizontal: (0.03.sw),
                       vertical: (0.sh),
                     ),
-                    child: Text(
-                      question,
-                      textDirection: TextDirection.rtl,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 0.0384.sw,
+                    child: Showcase(
+                      showcaseBackgroundColor:
+                          Color.fromARGB(255, 154, 88, 216),
+                      descTextStyle: TextStyle(color: Colors.white),
+                      key: _key0,
+                      description: 'النص متحرك قم بتحريكه لرؤية بقية السؤال',
+                      child: Text(
+                        question,
+                        textDirection: TextDirection.rtl,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 0.0384.sw,
+                        ),
                       ),
                     ),
                   ),
@@ -464,7 +506,7 @@ class _QuizPageState extends State<QuizPage> {
               color: kColor,
               borderRadius: BorderRadius.circular(40),
             ),
-            height: 0.04.sh,
+            height: 0.06.sh,
             width: 0.5.sw,
             child: Center(
               child: Text(message,
@@ -533,17 +575,17 @@ class _QuizPageState extends State<QuizPage> {
       if (questionCounter < map.length) {
         questionCounter++;
       } else {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => Results(
-              marks: marks,
-              key: Key('key2'),
-              wrong: wrongAnswers,
-              correctlist: correctAnswers,
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Results(
+                marks: marks,
+                key: Key('key2'),
+                wrong: wrongAnswers,
+                correctlist: correctAnswers,
+              ),
             ),
-          ),
-        );
+            (route) => true);
       }
       btnColor['a'] = Colors.black45;
       btnColor['b'] = Colors.black45;
@@ -579,6 +621,40 @@ class _QuizPageState extends State<QuizPage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        actions: [
+          Padding(
+              padding:
+                  EdgeInsets.symmetric(horizontal: 0.02.sw, vertical: 0.sw),
+              child: Showcase(
+                showcaseBackgroundColor: Color.fromARGB(255, 154, 88, 216),
+                descTextStyle: TextStyle(color: Colors.white),
+                description: 'يمكنك  الضغط هنا لرؤية شرح الازرار',
+                key: _key,
+                child: IconButton(
+                  icon: Icon(Icons.info_outlined),
+                  iconSize: 60.sp,
+                  onPressed: () {
+                    _controller.pause();
+                    WidgetsBinding.instance!.addPostFrameCallback((_) =>
+                        ShowCaseWidget.of(context)!
+                            .startShowCase([_key0, _key1, _key2, _key3]));
+                    // showDialog(
+                    //     context: context,
+                    //     builder: (BuildContext context) => AlertDialog(
+                    //           title: Text('ملاحظات:'),
+                    //           content: Text(
+                    //               '\n النص متحرك اسحب فوق النص لرؤية كامل السؤال \n استخدم الاسهم للانتقال بين الاسئلة اضغط على زر التحقق بعد اختيار الاجابة لفحص اجابتك '),
+                    //           actions: [
+                    //             TextButton(
+                    //                 onPressed: () {
+                    //                   },
+                    //                 child: Text('Cancel'))
+                    //           ],
+                    //         ));
+                  },
+                ),
+              ))
+        ],
       ),
       body: Stack(
         alignment: Alignment(-0.1, -0.5),

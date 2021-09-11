@@ -1,11 +1,8 @@
-// import 'package:cs/Pages/Home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'Pages/hom.dart';
-
-// import 'splashscreen/splash.dart';
+import 'splashscreen/splash.dart';
 
 void main() => runApp(MyApp());
 
@@ -20,7 +17,7 @@ class MyApp extends StatelessWidget {
       // designSize: Size(1080, 2340),
       builder: () => MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: Home(),
+        home: Splash(),
       ),
     );
   }

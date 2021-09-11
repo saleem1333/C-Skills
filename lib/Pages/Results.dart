@@ -1,7 +1,8 @@
+import 'package:cs/Pages/QuizPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 // import 'package:share/share.dart';
-import 'hom.dart';
+import 'Home.dart';
 
 // ignore: must_be_immutable
 class Results extends StatefulWidget {
@@ -124,7 +125,7 @@ class _ResultsState extends State<Results> {
   ConstrainedBox quizBox() {
     return ConstrainedBox(
       constraints: BoxConstraints(
-        maxHeight: 0.48.sh,
+        maxHeight: 0.5.sh,
       ),
       child: Card(
         margin: EdgeInsets.only(
@@ -319,7 +320,9 @@ class _ResultsState extends State<Results> {
               Column(
                 children: [
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                     child: CircleAvatar(
                       radius: 80.sp,
                       backgroundColor: Colors.brown[400],
