@@ -65,25 +65,34 @@ class _HomeState extends State<Home> {
               SizedBox(height: 50),
               Expanded(
                 flex: 3,
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(
-                        'assets/images/home.png',
+                child: Stack(
+                  alignment: Alignment(0.85, -0.85),
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(
+                            'assets/images/home.png',
+                          ),
+                          fit: BoxFit.cover,
+                        ),
+                        boxShadow: [
+                          new BoxShadow(
+                            color: ourColor,
+                            blurRadius: 200,
+                          ),
+                        ],
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
                       ),
-                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      margin: EdgeInsets.all(0.012.sh),
                     ),
-                    boxShadow: [
-                      new BoxShadow(
-                        color: ourColor,
-                        blurRadius: 200,
-                      ),
-                    ],
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  width: double.infinity,
-                  margin: EdgeInsets.all(0.012.sh),
+                    Image.asset(
+                      'assets/images/logo.png',
+                      height: 0.08.sh,
+                    ),
+                  ],
                 ),
               ),
               SizedBox(height: 0.01.sh),
