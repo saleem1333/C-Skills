@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       designSize: Size(720, 1520),
       // designSize: Size(1080, 2340),
       builder: () => MaterialApp(
-        title: 'C-skills',
+        title: 'C-Skills',
         debugShowCheckedModeBanner: false,
         home: Splash(),
       ),

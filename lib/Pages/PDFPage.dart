@@ -1,3 +1,4 @@
+import 'package:cs/Pages/Home.dart';
 import 'package:flutter/material.dart';
 import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
 
@@ -37,18 +38,16 @@ class _PDFPageState extends State<PDFPage> {
       body: Center(
         child: _isLoading
             ? Center(
-                child: CircularProgressIndicator(
-                color: Color.fromARGB(255, 154, 88, 216),
-              ))
+                child: CircularProgressIndicator(backgroundColor: ourColor),
+              )
             : PDFViewer(
-                progressIndicator: CircularProgressIndicator(
-                  color: Color.fromARGB(255, 154, 88, 216),
-                ),
-                pickerButtonColor: Color.fromARGB(255, 154, 88, 216),
+                progressIndicator:
+                    CircularProgressIndicator(backgroundColor: ourColor),
+                pickerButtonColor: ourColor,
                 document: document,
                 zoomSteps: 1,
                 //uncomment below line to preload all pages
-                // lazyLoad: false,
+                lazyLoad: false,
               ),
       ),
     );

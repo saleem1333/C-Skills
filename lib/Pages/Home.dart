@@ -1,9 +1,10 @@
 import 'dart:ui';
-import 'package:cs/Pages/Ready.dart';
-import 'package:cs/Pages/about.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'Ready.dart';
+import 'about.dart';
 import 'PDFPage.dart';
 
 Color ourColor = Color.fromARGB(255, 154, 88, 216);
@@ -154,7 +155,7 @@ Card myList(
     ),
     child: Center(
       child: Padding(
-        padding: EdgeInsets.all(0.012.sh),
+        padding: EdgeInsets.all(0.01.sh),
         child: ListTile(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
@@ -162,9 +163,6 @@ Card myList(
           onTap: () {
             late String myImage, myDescription;
             if (page == 'summary') {
-              myImage = 'assets/images/exam-3.png';
-              myDescription =
-                  'تم وضع ملخص للمقرر \n  حيث يشمل اهم الافكار و التعاريف و التعدادات \n\n يرجى التواصل معنا في حال وجود خطا او نقص';
             } else if (page == 'circles') {
               myImage = 'assets/images/exam-4.png';
               myDescription = 'تم في هذا القسم أتمتة دورة 2020 ' +
@@ -216,14 +214,26 @@ Card myList(
 
 void tap(
     {BuildContext? context, String? page, String? image, String? description}) {
-  Navigator.push(
+  if (page == 'summary') {
+    Navigator.push(
       context!,
       PageTransition(
-          child: Ready.withoutLocatio(
-            key: Key('key3'),
-            page: page,
-            image: image,
-            description: description,
-          ),
-          type: PageTransitionType.bottomToTop));
+        child: PDFPage.withoutLocatio(key: Key('key3')),
+        type: PageTransitionType.bottomToTop,
+      ),
+    );
+  } else {
+    Navigator.push(
+      context!,
+      PageTransition(
+        child: Ready.withoutLocatio(
+          key: Key('key3'),
+          page: page,
+          image: image,
+          description: description,
+        ),
+        type: PageTransitionType.bottomToTop,
+      ),
+    );
+  }
 }

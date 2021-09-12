@@ -1,15 +1,16 @@
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:audioplayers/audio_cache.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:ui';
 import 'package:flutter/rendering.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:showcaseview/showcaseview.dart';
+import 'Home.dart';
 import 'Results.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/services.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 
@@ -80,6 +81,7 @@ class _QuizPageState extends State<QuizPage> {
   final assetsAudioPlayer = AudioCache();
   CountDownController _controller = CountDownController();
   //end variables
+
   //Quiz Page UI
   Column page() {
     return Column(
@@ -404,7 +406,7 @@ class _QuizPageState extends State<QuizPage> {
                     style: TextStyle(
                       color: ourColor,
                       fontWeight: FontWeight.bold,
-                      fontSize: 00.04.sw,
+                      fontSize: 00.035.sw,
                     ),
                   ),
                   Text(
@@ -412,7 +414,7 @@ class _QuizPageState extends State<QuizPage> {
                     style: TextStyle(
                       color: ourColor,
                       fontWeight: FontWeight.bold,
-                      fontSize: 00.055.sw,
+                      fontSize: 00.05.sw,
                     ),
                   ),
                   Text(
@@ -420,7 +422,7 @@ class _QuizPageState extends State<QuizPage> {
                     style: TextStyle(
                       color: ourColor,
                       fontWeight: FontWeight.bold,
-                      fontSize: 00.04.sw,
+                      fontSize: 00.035.sw,
                     ),
                   ),
                 ],
@@ -439,13 +441,15 @@ class _QuizPageState extends State<QuizPage> {
                           Color.fromARGB(255, 154, 88, 216),
                       descTextStyle: TextStyle(color: Colors.white),
                       key: _key0,
-                      description: 'النص متحرك قم بتحريكه لرؤية بقية السؤال',
+                      description:
+                          'في حال كان السؤال طويلا لن يظهر بشكل كامل،،\n عندها قم بتحريكه للأسفل لرؤية التكملة',
                       child: Text(
                         question,
+                        textAlign: TextAlign.center,
                         textDirection: TextDirection.rtl,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 0.0384.sw,
+                          fontSize: 0.04.sw,
                         ),
                       ),
                     ),
@@ -633,43 +637,43 @@ class _QuizPageState extends State<QuizPage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.home),
+          iconSize: 60.sp,
+          onPressed: () {
+            Navigator.pushAndRemoveUntil(
+                context,
+                PageTransition(
+                  child: Home(),
+                  type: PageTransitionType.rightToLeft,
+                ),
+                (route) => false);
+          },
+        ),
         actions: [
           Padding(
-              padding:
-                  EdgeInsets.symmetric(horizontal: 0.02.sw, vertical: 0.sw),
-              child: Showcase(
-                showcaseBackgroundColor: Color.fromARGB(255, 154, 88, 216),
-                descTextStyle: TextStyle(color: Colors.white),
-                description: 'يمكنك  الضغط هنا لرؤية شرح الازرار',
-                key: _key,
-                child: IconButton(
-                  icon: Icon(Icons.info_outlined),
-                  iconSize: 60.sp,
-                  onPressed: () {
-                    _controller.pause();
-                    WidgetsBinding.instance!.addPostFrameCallback((_) {
-                      ShowCaseWidget.of(context)!
-                          .startShowCase([_key0, _key1, _key2, _key3]);
-                      Future.delayed(Duration(seconds: 2), () {
-                        _controller.resume();
-                      });
+            padding: EdgeInsets.symmetric(horizontal: 0.02.sw, vertical: 0.sw),
+            child: Showcase(
+              showcaseBackgroundColor: ourColor,
+              descTextStyle: TextStyle(color: Colors.white),
+              description: 'يمكنك  الضغط هنا لرؤية شرح الازرار',
+              key: _key,
+              child: IconButton(
+                icon: Icon(Icons.info_outlined),
+                iconSize: 60.sp,
+                onPressed: () {
+                  _controller.pause();
+                  WidgetsBinding.instance!.addPostFrameCallback((_) {
+                    ShowCaseWidget.of(context)!
+                        .startShowCase([_key0, _key1, _key2, _key3]);
+                    Future.delayed(Duration(seconds: 3), () {
+                      _controller.resume();
                     });
-                    // showDialog(
-                    //     context: context,
-                    //     builder: (BuildContext context) => AlertDialog(
-                    //           title: Text('ملاحظات:'),
-                    //           content: Text(
-                    //               '\n النص متحرك اسحب فوق النص لرؤية كامل السؤال \n استخدم الاسهم للانتقال بين الاسئلة اضغط على زر التحقق بعد اختيار الاجابة لفحص اجابتك '),
-                    //           actions: [
-                    //             TextButton(
-                    //                 onPressed: () {
-                    //                   },
-                    //                 child: Text('Cancel'))
-                    //           ],
-                    //         ));
-                  },
-                ),
-              ))
+                  });
+                },
+              ),
+            ),
+          ),
         ],
       ),
       body: Stack(
@@ -692,7 +696,10 @@ Future<bool> _isFirstLaunch() async {
 
   if (isFirstLaunch)
     sharedPreferences.setBool(
-        QuizPage.PREFERENCES_IS_FIRST_LAUNCH_STRING, false);
+      QuizPage.PREFERENCES_IS_FIRST_LAUNCH_STRING,
+      false,
+    );
 
   return isFirstLaunch;
+  // return true;
 }

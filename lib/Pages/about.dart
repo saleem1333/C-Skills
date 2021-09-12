@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AboutPage extends StatelessWidget {
   AboutPage.without(Key key);
@@ -11,9 +11,6 @@ class AboutPage extends StatelessWidget {
 
   static const telegramAccount = 'https://t.me/Cskills_bot';
 
-  void _launchURL() => launch(
-        telegramAccount,
-      );
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -26,7 +23,7 @@ class AboutPage extends StatelessWidget {
             'About',
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 45.sp,
+              fontSize: 50.sp,
             ),
           ),
           centerTitle: true,
@@ -59,18 +56,32 @@ class AboutPage extends StatelessWidget {
                   ),
                   width: double.infinity,
                   child: Padding(
-                    padding: EdgeInsets.all(0.03.sh),
-                    child: Text(
-                      'تم إنشاء هذا التطبيق نتيجة لكثرة شكاوي الطلاب حول ' +
-                          ' عدم معرفة كيفية دراسة مادة مهارات التواصل، ' +
-                          'وعند طرح الفكرة نالت إعجاباً كبيراً فتم تنفيذها.\n' +
-                          'يرجى التواصل مع المطورين في حال تم اكتشاف أخطاء ' +
-                          'سواء كانت علمية أم تقنية،، وشكراً لكم',
-                      textDirection: TextDirection.rtl,
-                      style: TextStyle(
-                        fontSize: 29.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    padding: EdgeInsets.all(0.015.sh),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          'تم إنشاء هذا التطبيق نتيجة لكثرة شكاوي الطلاب حول ' +
+                              ' عدم معرفة كيفية دراسة مادة مهارات التواصل بالرغم من سهولتها، ' +
+                              'وعند طرح فكرة التطبيق نالت إعجاباً كبيراً فتم تنفيذها.\n' +
+                              'يرجى التواصل مع المطورين في حال تم اكتشاف أخطاء ' +
+                              'سواء كانت علمية أم تقنية،،',
+                          textDirection: TextDirection.rtl,
+                          style: TextStyle(
+                            fontSize: 0.02.sh,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          'شكراً لكم..',
+                          textDirection: TextDirection.rtl,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 0.02.sh,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -91,7 +102,7 @@ class AboutPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15),
                   ),
                   onPressed: () {
-                    _launchURL();
+                    launch(telegramAccount);
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -99,15 +110,15 @@ class AboutPage extends StatelessWidget {
                       CircleAvatar(
                         child: Image.asset('assets/images/telegram.png'),
                         backgroundColor: Colors.transparent,
-                        radius: 30.sp,
+                        radius: 0.02.sh,
                       ),
-                      SizedBox(width: 5),
+                      SizedBox(width: 0.01.sw),
                       Text(
                         'تواصل معنا',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 0.045.sw,
+                          fontSize: 0.025.sh,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -116,21 +127,17 @@ class AboutPage extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 0.05.sw,
-                  // vertical: 0.02.sw,
-                ),
-                child: Divider(
-                  color: Colors.black,
-                ),
+                padding: EdgeInsets.symmetric(horizontal: 0.06.sw),
+                child: Divider(color: Colors.white),
               ),
               Text(
-                'Developed by\nOmar Kaialy & Osama Rida',
+                'Developed By\nOmar Kaialy & Osama Rida',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 0.035.sw,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 0.025.sh,
+                  fontFamily: 'AkayaKanadaka',
+                  height: 1.25,
+                  color: Colors.white,
                 ),
               ),
             ],
