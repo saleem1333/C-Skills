@@ -27,19 +27,29 @@ class _PDFPageState extends State<PDFPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Center(
-          child: _isLoading
-              ? Center(child: CircularProgressIndicator())
-              : PDFViewer(
-                  document: document,
-                  zoomSteps: 1,
-                  //uncomment below line to preload all pages
-                  // lazyLoad: false,
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: Color.fromARGB(255, 154, 88, 216)),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+      body: Center(
+        child: _isLoading
+            ? Center(
+                child: CircularProgressIndicator(
+                color: Color.fromARGB(255, 154, 88, 216),
+              ))
+            : PDFViewer(
+                progressIndicator: CircularProgressIndicator(
+                  color: Color.fromARGB(255, 154, 88, 216),
                 ),
-        ),
+                pickerButtonColor: Color.fromARGB(255, 154, 88, 216),
+                document: document,
+                zoomSteps: 1,
+                //uncomment below line to preload all pages
+                // lazyLoad: false,
+              ),
       ),
     );
   }

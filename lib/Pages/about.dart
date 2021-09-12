@@ -11,10 +11,9 @@ class AboutPage extends StatelessWidget {
 
   static const telegramAccount = 'https://t.me/Cskills_bot';
 
-  void _launchURL() async => await canLaunch(telegramAccount)
-      ? await launch(telegramAccount)
-      : throw 'Could not launch $telegramAccount';
-
+  void _launchURL() => launch(
+        telegramAccount,
+      );
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -46,12 +45,12 @@ class AboutPage extends StatelessWidget {
               Icon(
                 Icons.info_outlined,
                 color: Colors.white,
-                size: 0.4.sh,
+                size: 0.35.sh,
               ),
               Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: 0.05.sw,
-                  vertical: 0.025.sw,
+                  vertical: 0.02.sw,
                 ),
                 child: Container(
                   decoration: BoxDecoration(
@@ -92,7 +91,7 @@ class AboutPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15),
                   ),
                   onPressed: () {
-                    // _launchURL();
+                    _launchURL();
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,

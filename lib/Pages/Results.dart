@@ -1,6 +1,7 @@
 import 'package:cs/Pages/QuizPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:share/share.dart';
 import 'Home.dart';
 
@@ -347,8 +348,12 @@ class _ResultsState extends State<Results> {
                 children: [
                   TextButton(
                     onPressed: () {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => Home()));
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          PageTransition(
+                              child: Home(),
+                              type: PageTransitionType.topToBottom),
+                          (route) => false);
                     },
                     child: CircleAvatar(
                       radius: 80.sp,

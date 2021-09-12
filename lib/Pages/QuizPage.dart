@@ -2,6 +2,8 @@
 import 'package:audioplayers/audio_cache.dart';
 import 'dart:ui';
 import 'package:flutter/rendering.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:showcaseview/showcaseview.dart';
 import 'Results.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +18,9 @@ class QuizPage extends StatefulWidget {
   var map;
   var answersList;
   var correctAnswers;
+  static const PREFERENCES_IS_FIRST_LAUNCH_STRING =
+      "PREFERENCES_IS_FIRST_LAUNCH_STRING";
+
   QuizPage.without(Key key);
 
   QuizPage.withoutLocatio(
@@ -35,8 +40,11 @@ class _QuizPageState extends State<QuizPage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance!.addPostFrameCallback((_) {
-      ShowCaseWidget.of(context)!
-          .startShowCase([_key0, _key1, _key2, _key3, _key]);
+      _isFirstLaunch().then((result) {
+        if (result)
+          ShowCaseWidget.of(context)!
+              .startShowCase([_key0, _key1, _key2, _key3, _key]);
+      });
     });
   } //variables:
 
@@ -72,7 +80,6 @@ class _QuizPageState extends State<QuizPage> {
   final assetsAudioPlayer = AudioCache();
   CountDownController _controller = CountDownController();
   //end variables
-
   //Quiz Page UI
   Column page() {
     return Column(
@@ -506,12 +513,14 @@ class _QuizPageState extends State<QuizPage> {
               color: kColor,
               borderRadius: BorderRadius.circular(40),
             ),
-            height: 0.06.sh,
+            height: 0.055.sh,
             width: 0.5.sw,
-            child: Center(
-              child: Text(
-                message,
-                style: TextStyle(fontSize: 12, color: Colors.white),
+            child: Padding(
+              padding: EdgeInsets.all(5),
+              child: Center(
+                child: Text(message,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(fontSize: 20.sp, color: Colors.white)),
               ),
             ),
           ),
@@ -577,16 +586,17 @@ class _QuizPageState extends State<QuizPage> {
       if (questionCounter < map.length) {
         questionCounter++;
       } else {
+        questionCounter = 1;
         Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(
-              builder: (context) => Results(
-                marks: marks,
-                key: Key('key2'),
-                wrong: wrongAnswers,
-                correctlist: correctAnswers,
-              ),
-            ),
+            PageTransition(
+                child: Results(
+                  marks: marks,
+                  key: Key('key2'),
+                  wrong: wrongAnswers,
+                  correctlist: correctAnswers,
+                ),
+                type: PageTransitionType.fade),
             (route) => true);
       }
       btnColor['a'] = Colors.black45;
@@ -625,26 +635,41 @@ class _QuizPageState extends State<QuizPage> {
         elevation: 0,
         actions: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 0.02.sw, vertical: 0.sw),
-            child: Showcase(
-              showcaseBackgroundColor: Color.fromARGB(255, 154, 88, 216),
-              descTextStyle: TextStyle(color: Colors.white),
-              description: 'يمكنك  الضغط هنا لرؤية شرح الازرار',
-              key: _key,
-              child: IconButton(
-                icon: Icon(Icons.info_outlined),
-                iconSize: 60.sp,
-                onPressed: () {
-                  _controller.pause();
-                  WidgetsBinding.instance!.addPostFrameCallback(
-                    (_) => ShowCaseWidget.of(context)!.startShowCase(
-                      [_key0, _key1, _key2, _key3],
-                    ),
-                  );
-                },
-              ),
-            ),
-          ),
+              padding:
+                  EdgeInsets.symmetric(horizontal: 0.02.sw, vertical: 0.sw),
+              child: Showcase(
+                showcaseBackgroundColor: Color.fromARGB(255, 154, 88, 216),
+                descTextStyle: TextStyle(color: Colors.white),
+                description: 'يمكنك  الضغط هنا لرؤية شرح الازرار',
+                key: _key,
+                child: IconButton(
+                  icon: Icon(Icons.info_outlined),
+                  iconSize: 60.sp,
+                  onPressed: () {
+                    _controller.pause();
+                    WidgetsBinding.instance!.addPostFrameCallback((_) {
+                      ShowCaseWidget.of(context)!
+                          .startShowCase([_key0, _key1, _key2, _key3]);
+                      Future.delayed(Duration(seconds: 2), () {
+                        _controller.resume();
+                      });
+                    });
+                    // showDialog(
+                    //     context: context,
+                    //     builder: (BuildContext context) => AlertDialog(
+                    //           title: Text('ملاحظات:'),
+                    //           content: Text(
+                    //               '\n النص متحرك اسحب فوق النص لرؤية كامل السؤال \n استخدم الاسهم للانتقال بين الاسئلة اضغط على زر التحقق بعد اختيار الاجابة لفحص اجابتك '),
+                    //           actions: [
+                    //             TextButton(
+                    //                 onPressed: () {
+                    //                   },
+                    //                 child: Text('Cancel'))
+                    //           ],
+                    //         ));
+                  },
+                ),
+              ))
         ],
       ),
       body: Stack(
@@ -657,4 +682,17 @@ class _QuizPageState extends State<QuizPage> {
       ),
     );
   }
+}
+
+Future<bool> _isFirstLaunch() async {
+  final sharedPreferences = await SharedPreferences.getInstance();
+  bool isFirstLaunch =
+      sharedPreferences.getBool(QuizPage.PREFERENCES_IS_FIRST_LAUNCH_STRING) ??
+          true;
+
+  if (isFirstLaunch)
+    sharedPreferences.setBool(
+        QuizPage.PREFERENCES_IS_FIRST_LAUNCH_STRING, false);
+
+  return isFirstLaunch;
 }
