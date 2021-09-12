@@ -19,12 +19,12 @@ dependencies:
   animated_splash_screen: ^1.1.0-nullsafety.0
   flutter_launcher_icons: ^0.8.1
   flutter_screenutil: ^5.0.0+2
+  showcaseview: ^1.1.1
+  shared_preferences: ^0.5.12+4
   share: ^2.0.4
   fluttertoast: ^8.0.8
   audioplayers: ^0.16.0
   advance_pdf_viewer: ^1.0.0
-  showcaseview: ^1.1.1
-  shared_preferences: ^0.5.12+4
   url_launcher: ^6.0.5
 
 flutter_icons:
@@ -38,8 +38,14 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
   assets:
     - assets/images/
     - assets/sounds/
     - assets/files/
     - icons/
+  
+  fonts:
+    - family: AkayaKanadaka
+      fonts:
+      - asset: fonts/AkayaKanadaka-Regular.ttf
