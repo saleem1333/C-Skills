@@ -79,25 +79,26 @@ class _ReadyState extends State<Ready> {
                   width: double.infinity,
                   margin: EdgeInsets.all(0.012.sh),
                   child: Padding(
-                    padding: EdgeInsets.all(0.03.sh),
+                    padding: EdgeInsets.all(0.02.sh),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          '$description',
-                          textDirection: TextDirection.rtl,
-                          style: TextStyle(
-                            fontSize: 29.sp,
-                            fontWeight: FontWeight.bold,
+                        SingleChildScrollView(
+                          child: Text(
+                            '$description',
+                            textDirection: TextDirection.rtl,
+                            style: TextStyle(
+                              fontSize: 28.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                         Text(
-                          'إذا كنت مستعدًا اضغط زر البدء\nحظاً موفقاً!\n',
+                          'إذا كنت مستعدًا اضغط زر البدء\nحظاً موفقاً!',
                           textAlign: TextAlign.center,
                           textDirection: TextDirection.rtl,
                           style: TextStyle(
                             color: Colors.red,
-                            fontSize: 29.sp,
+                            fontSize: 28.sp,
                             fontWeight: FontWeight.bold,
                           ),
                         ),

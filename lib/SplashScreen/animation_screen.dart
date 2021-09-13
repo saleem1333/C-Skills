@@ -1,3 +1,5 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:cs/Pages/Home.dart';
 import 'package:flutter/material.dart';
 import 'hole_painter.dart';
 import 'staggered_raindrop_animation.dart';
@@ -70,20 +72,30 @@ class _AnimationScreenState extends State<AnimationScreen>
           child: Opacity(
             opacity: _animation.textOpacity.value,
             child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('assets/images/splash-background.png'),
-                    fit: BoxFit.cover),
-              ),
               child: Column(
                 children: [
                   SizedBox(
-                    height: size.height / 4,
+                    height: size.height / 3,
                   ),
-                  Image(
-                    image: AssetImage('assets/images/splash.gif'),
-                    fit: BoxFit.scaleDown,
+                  TextLiquidFill(
+                    text: 'C S',
+                    textStyle: TextStyle(
+                      fontSize: size.height / 4.5,
+                      fontFamily: 'AkayaKanadaka',
+                    ),
+                    boxBackgroundColor: ourColor,
+                    waveDuration: Duration(seconds: 4),
+                    waveColor: Colors.yellow,
                   ),
+                  AnimatedTextKit(animatedTexts: [
+                    TyperAnimatedText('communication skills',
+                        textStyle: TextStyle(
+                            color: Colors.amberAccent,
+                            fontFamily: 'AkayaKanadaka',
+                            fontSize: size.height / 30),
+                        curve: Curves.linear,
+                        speed: Duration(milliseconds: 200))
+                  ])
                 ],
               ),
             ),
