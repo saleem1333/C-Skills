@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,7 +7,7 @@ class AboutPage extends StatelessWidget {
   AboutPage.without(Key key);
 
   AboutPage.withoutLocatio({
-    required Key key,
+    @required Key key,
   }) : super(key: key);
 
   static const telegramAccount = 'https://t.me/Cskills_bot';
@@ -130,16 +131,18 @@ class AboutPage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 0.06.sw),
                 child: Divider(color: Colors.white),
               ),
-              Text(
-                'Developed By\nOmar Kaialy & Osama Rida',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 0.025.sh,
-                  fontFamily: 'AkayaKanadaka',
-                  height: 1.25,
-                  color: Colors.white,
-                ),
-              ),
+              AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
+                TyperAnimatedText(
+                  'Developed By\nOmar Kaialy & Osama Rida',
+                  textAlign: TextAlign.center,
+                  textStyle: TextStyle(
+                    fontSize: 0.025.sh,
+                    fontFamily: 'AkayaKanadaka',
+                    height: 1.25,
+                    color: Colors.white,
+                  ),
+                )
+              ])
             ],
           ),
         ),

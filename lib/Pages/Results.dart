@@ -11,10 +11,10 @@ class Results extends StatefulWidget {
   int wrong;
   var correctlist;
   Results(
-      {required Key key,
-      required this.marks,
-      required this.wrong,
-      required this.correctlist})
+      {@required Key key,
+      @required this.marks,
+      @required this.wrong,
+      @required this.correctlist})
       : super(key: key);
 
   @override

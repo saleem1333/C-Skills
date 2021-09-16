@@ -1,10 +1,11 @@
-import 'package:cs/Pages/Home.dart';
 import 'package:flutter/material.dart';
 import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
 
+import 'Home.dart';
+
 class PDFPage extends StatefulWidget {
   PDFPage.withoutLocatio({
-    required Key key,
+    @required Key key,
   }) : super(key: key);
 
   @override
@@ -13,7 +14,7 @@ class PDFPage extends StatefulWidget {
 
 class _PDFPageState extends State<PDFPage> {
   bool _isLoading = true;
-  late PDFDocument document;
+  PDFDocument document;
 
   @override
   void initState() {

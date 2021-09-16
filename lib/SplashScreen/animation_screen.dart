@@ -1,11 +1,11 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:cs/Pages/Home.dart';
+import 'package:cskills/Pages/Home.dart';
 import 'package:flutter/material.dart';
 import 'hole_painter.dart';
 import 'staggered_raindrop_animation.dart';
 
 class AnimationScreen extends StatefulWidget {
-  AnimationScreen({required this.color});
+  AnimationScreen({@required this.color});
 
   final Color color;
 
@@ -16,8 +16,8 @@ class AnimationScreen extends StatefulWidget {
 class _AnimationScreenState extends State<AnimationScreen>
     with SingleTickerProviderStateMixin {
   Size size = Size.zero;
-  late AnimationController _controller;
-  late StaggeredRaindropAnimation _animation;
+  AnimationController _controller;
+  StaggeredRaindropAnimation _animation;
 
   @override
   void initState() {
@@ -86,8 +86,10 @@ class _AnimationScreenState extends State<AnimationScreen>
                     boxBackgroundColor: ourColor,
                     waveDuration: Duration(seconds: 4),
                     waveColor: Colors.yellow,
+                    loadDuration: Duration(seconds: 5),
+                    boxHeight: 300,
                   ),
-                  AnimatedTextKit(animatedTexts: [
+                  AnimatedTextKit(totalRepeatCount: 1, animatedTexts: [
                     TyperAnimatedText('communication skills',
                         textStyle: TextStyle(
                             color: Colors.amberAccent,

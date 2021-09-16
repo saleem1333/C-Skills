@@ -148,92 +148,84 @@ class _HomeState extends State<Home> {
 }
 
 Card myList(
-    {String? title,
-    String? hint,
-    Icon? icon,
-    String? image,
-    String? page,
-    BuildContext? context}) {
+    {String title,
+    String hint,
+    Icon icon,
+    String image,
+    String page,
+    BuildContext context}) {
   return Card(
-    borderOnForeground: true,
-    elevation: 20,
-    color: Colors.white,
-    margin: EdgeInsets.all(0.012.sh),
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(20),
-    ),
-    child: Center(
-      child: Padding(
-        padding: EdgeInsets.all(0.01.sh),
-        child: ListTile(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          onTap: () {
-            late String myImage, myDescription;
-            if (page == 'summary') {
-            } else if (page == 'circles') {
-              myImage = 'assets/images/exam-4.png';
-              myDescription = 'تم في هذا القسم أتمتة دورة 2020 ' +
-                  'ووضعها على شكل Quiz ليتمكن الطالب من اختبار نفسه ومعرفة مستواه  في تلك الدورة.\n' +
-                  '\n#ملاحظة: في كل سؤال لديك مهلة 30 ثانية للإجابة وإلا سيتم الانتقال للسؤال التالي' +
-                  ' واعتبار الإجابة خاطئة.';
-            } else if (page == 'full exam') {
-              myImage = 'assets/images/stopwatch.png';
-              myDescription = 'هنا اختبار شامل تم وضعه من ضمن الملخص' +
-                  ' يقيس مدى فهم الطالب للملخص واستعداده لامتحان مادة مهارات التواصل.\n' +
-                  '\n#ملاحظة: في كل سؤال لديك مهلة 30 ثانية للإجابة وإلا سيتم الانتقال للسؤال التالي' +
-                  ' واعتبار الإجابة خاطئة.';
-            }
-            tap(
-              context: context,
-              image: myImage,
-              description: myDescription,
-              page: page,
-            );
-          },
-          leading: icon,
-          title: Text(
-            '$title',
-            textDirection: TextDirection.rtl,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 35.sp,
+    margin: EdgeInsets.all(0.01.sh),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+    child: ListTile(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      onTap: () {
+        String myImage, myDescription;
+        if (page == 'summary') {
+          myImage = '';
+          myDescription = '';
+          Navigator.push(
+            context,
+            PageTransition(
+              child: PDFPage.withoutLocatio(key: Key('key3')),
+              type: PageTransitionType.bottomToTop,
             ),
-          ),
-          subtitle: Text(
-            '$hint',
-            textDirection: TextDirection.rtl,
-            style: TextStyle(
-              fontSize: 30.sp,
-            ),
-          ),
-          trailing: CircleAvatar(
-            child: Image.asset('$image'),
-            backgroundColor: Colors.transparent,
-            radius: 40.sp,
-          ),
-          tileColor: Colors.white,
-          horizontalTitleGap: 0.045.sw,
+          );
+        } else if (page == 'circles') {
+          myImage = 'assets/images/exam-4.png';
+          myDescription = 'تم في هذا القسم أتمتة دورة 2020 ' +
+              'ووضعها على شكل Quiz ليتمكن الطالب من اختبار نفسه ومعرفة مستواه  في تلك الدورة.\n' +
+              '\n#ملاحظة: في كل سؤال لديك مهلة 30 ثانية للإجابة وإلا سيتم الانتقال للسؤال التالي' +
+              ' واعتبار الإجابة خاطئة.';
+        } else if (page == 'full exam') {
+          myImage = 'assets/images/stopwatch.png';
+          myDescription = 'هنا اختبار شامل تم وضعه من ضمن الملخص' +
+              ' يقيس مدى فهم الطالب للملخص واستعداده لامتحان مادة مهارات التواصل.\n' +
+              '\n#ملاحظة: في كل سؤال لديك مهلة 30 ثانية للإجابة وإلا سيتم الانتقال للسؤال التالي' +
+              ' واعتبار الإجابة خاطئة.';
+        }
+        tap(
+          context: context,
+          image: myImage,
+          description: myDescription,
+          page: page,
+        );
+      },
+      leading: icon,
+      title: Text(
+        '$title',
+        textDirection: TextDirection.rtl,
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 35.sp,
         ),
       ),
+      subtitle: Text(
+        '$hint',
+        textDirection: TextDirection.rtl,
+        style: TextStyle(
+          fontSize: 30.sp,
+        ),
+      ),
+      trailing: CircleAvatar(
+        child: Image.asset('$image'),
+        backgroundColor: Colors.transparent,
+        radius: 40.sp,
+      ),
+      tileColor: Colors.white,
+      horizontalTitleGap: 0.045.sw,
     ),
   );
 }
 
 void tap(
-    {BuildContext? context, String? page, String? image, String? description}) {
+    {BuildContext context, String page, String image, String description}) {
   if (page == 'summary') {
-    Navigator.push(
-      context!,
-      PageTransition(
-        child: PDFPage.withoutLocatio(key: Key('key3')),
-        type: PageTransitionType.bottomToTop,
-      ),
-    );
   } else {
     Navigator.push(
-      context!,
+      context,
       PageTransition(
         child: Ready.withoutLocatio(
           key: Key('key3'),

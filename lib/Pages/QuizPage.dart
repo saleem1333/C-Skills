@@ -25,10 +25,10 @@ class QuizPage extends StatefulWidget {
   QuizPage.without(Key key);
 
   QuizPage.withoutLocatio(
-      {required Key key,
-      required this.map,
-      required this.answersList,
-      required this.correctAnswers})
+      {@required Key key,
+      @required this.map,
+      @required this.answersList,
+      @required this.correctAnswers})
       : super(key: key);
 
   @override
@@ -40,11 +40,16 @@ class _QuizPageState extends State<QuizPage> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _isFirstLaunch().then((result) {
-        if (result)
-          ShowCaseWidget.of(context)!
+        if (result) {
+          ShowCaseWidget.of(context)
               .startShowCase([_key0, _key1, _key2, _key3, _key]);
+          _controller.pause();
+          Future.delayed(Duration(seconds: 3), () {
+            _controller.resume();
+          });
+        }
       });
     });
   } //variables:
@@ -70,7 +75,7 @@ class _QuizPageState extends State<QuizPage> {
   };
   bool buttonClicked = false;
   int buttonDisabled = 1;
-  late String correctAns;
+  String correctAns;
   int marks = 0;
   Color ourColor = Color.fromARGB(255, 154, 88, 216);
   Color timerColor = Color.fromARGB(255, 154, 88, 216);
@@ -475,7 +480,7 @@ class _QuizPageState extends State<QuizPage> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
         side: BorderSide(
-          color: btnColor[buttonKey]!,
+          color: btnColor[buttonKey],
           width: 2.5,
         ),
       ),
@@ -493,7 +498,7 @@ class _QuizPageState extends State<QuizPage> {
       },
       // choices
       child: Text(
-        answersList[questionCounter.toString()]![buttonKey].toString(),
+        answersList[questionCounter.toString()][buttonKey].toString(),
         textDirection: TextDirection.rtl,
         style: TextStyle(
           fontSize: 0.0365.sw,
@@ -663,8 +668,8 @@ class _QuizPageState extends State<QuizPage> {
                 iconSize: 60.sp,
                 onPressed: () {
                   _controller.pause();
-                  WidgetsBinding.instance!.addPostFrameCallback((_) {
-                    ShowCaseWidget.of(context)!
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    ShowCaseWidget.of(context)
                         .startShowCase([_key0, _key1, _key2, _key3]);
                     Future.delayed(Duration(seconds: 3), () {
                       _controller.resume();

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class HolePainter extends CustomPainter {
   HolePainter({
-    required this.color,
-    required this.holeSize,
+    @required this.color,
+    @required this.holeSize,
   });
 
   Color color;

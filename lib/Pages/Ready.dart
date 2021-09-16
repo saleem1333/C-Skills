@@ -13,15 +13,15 @@ class Ready extends StatefulWidget {
   Ready.without(Key key, this.description, this.image, this.page);
 
   Ready.withoutLocatio({
-    required Key key,
-    required this.page,
-    required this.image,
-    required this.description,
+    @required Key key,
+    @required this.page,
+    @required this.image,
+    @required this.description,
   }) : super(key: key);
 
-  final String? description;
-  final String? image;
-  final String? page;
+  final String description;
+  final String image;
+  final String page;
 
   @override
   _ReadyState createState() => _ReadyState(page, image, description);
@@ -30,10 +30,10 @@ class Ready extends StatefulWidget {
 class _ReadyState extends State<Ready> {
   _ReadyState(this.page, this.image, this.description);
 
-  String? description;
-  String? image;
+  String description;
+  String image;
   Color ourColor = Color.fromARGB(255, 154, 88, 216);
-  String? page;
+  String page;
 
   @override
   Widget build(BuildContext context) {
@@ -66,8 +66,9 @@ class _ReadyState extends State<Ready> {
               SizedBox(height: 45),
               Expanded(
                 child: Image(
-                  image: AssetImage(image!),
+                  image: AssetImage(image),
                 ),
+                
                 flex: 5,
               ),
               Expanded(

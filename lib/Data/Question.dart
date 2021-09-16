@@ -1,4 +1,6 @@
 class Question {
-  late String quiz;
-  Question(String a) { quiz = a; }
+  String quiz;
+  Question(String a) {
+    quiz = a;
+  }
 }
