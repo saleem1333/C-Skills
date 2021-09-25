@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'Ready.dart';
 import 'about.dart';
-import 'PDFPage.dart';
+import 'pdf_page.dart';
 
 Color ourColor = Color.fromARGB(255, 154, 88, 216);
 
